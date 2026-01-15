@@ -1,49 +1,50 @@
 # P2_GigiWongQianYing
 P2
-# Financial News Sentiment → Market Signal (FIQA + FNSPID)
+# LLM-Based Financial Sentiment and Market Predictability
 
-This repository contains an end-to-end research pipeline that transforms financial news headlines into quantitative market signals using Large Language Models (LLMs), and evaluates the predictive value of sentiment against DJIA returns.
+This repository contains the full experimental code for a master's-level research project that investigates whether Large Language Models (LLMs) can extract predictive market sentiment from financial news headlines.
 
-## Project Structure
+The pipeline evaluates prompt-based sentiment inference on FIQA-2018 and applies the best-performing strategies to a DJIA news dataset to construct a Daily Market Sentiment Index (DMSI) and test its predictive power.
 
-- `01_fiqa_preprocessing.ipynb`
-  - Loads FIQA-2018, standardizes fields, injects sector metadata (Yahoo Finance + manual mapping),
-  - Produces: `fiqa_standardized.csv`.
+---
 
-- `02_fiqa_experiment_and_evaluation.ipynb`
-  - Runs FIQA sentiment classification using 9 prompt strategies (ZS / RP / CoT) with Gemini,
-  - Saves inference outputs to CSV incrementally (supports sample run + full run),
-  - Evaluates Accuracy / Precision / Recall / F1-score by prompt_id,
-  - Produces: `fiqa_results.csv`, `fiqa_metrics_summary.csv`.
+## Repository Structure
 
-- `03_fnspid_experiment_and_results.ipynb`
-  - Runs selected prompts on a DJIA news dataset (FNSPID-like pipeline),
-  - Includes batch execution, retry handling, failure logging, and resume logic,
-  - Constructs Daily Market Sentiment Index (DMSI) and computes Information Coefficient (IC),
-  - Performs deeper validation (Granger test, T+2 IC safety check),
-  - Produces: `fnspid_full_sentiment_results.csv`, `Final_Leaderboard.csv`, `Final_Dataset_Predictive_Best_*.csv`,
-  - Includes a simple long/short backtest vs buy-and-hold DJIA.
+### 01_fiqa_preprocessing.ipynb
+- Loads and cleans the FIQA-2018 dataset
+- Constructs sentiment labels from continuous scores
+- Injects sector information using Yahoo Finance with manual correction
+- Outputs a standardized dataset for prompt experiments
 
-## Data Requirements
+### 02_fiqa_experiment_and_evaluation.ipynb
+- Runs sentiment classification using 9 prompt strategies (Zero-Shot, Role-Playing, Chain-of-Thought)
+- Uses Google Gemini (Flash) via prompt engineering
+- Supports sample runs and full-scale execution with retry handling
+- Evaluates Accuracy, Precision, Recall, and F1-score for each prompt
 
-You will need the following CSV files available in your working directory (or Google Drive if running in Colab):
+### 03_fnspid_experiment_and_results.ipynb
+- Applies selected prompts to DJIA financial news
+- Constructs the Daily Market Sentiment Index (DMSI)
+- Evaluates predictability using Information Coefficient (IC)
+- Performs Granger causality tests and T+2 safety checks
+- Includes a simple long–short backtesting simulation
 
-- FIQA:
-  - `fiqa_1.csv` (FIQA dataset exported to CSV)
-  - Output: `fiqa_standardized.csv`
-
-- DJIA / FNSPID:
-  - `djia_news_cleaned_no_duplicates.csv` (news headlines with at least: date, ticker, title)
-  - `DJIA_2021_2023.csv` (DJIA price history with at least: date, close)
-  - `final_ticker_sector*.csv` (ticker → sector mapping)
+---
 
 ## Environment
 
-Recommended (Colab-friendly):
 - Python 3.10+
 - pandas, numpy, tqdm, scikit-learn, statsmodels, matplotlib
 - google-genai SDK
 
-Install (example):
-```bash
-pip install -U pandas numpy tqdm scikit-learn statsmodels matplotlib google-genai
+The notebooks request a Google GenAI API key via secure input and do not store credentials in code.
+
+---
+
+## Execution Order
+
+1. Run `01_fiqa_preprocessing.ipynb`
+2. Run `02_fiqa_experiment_and_evaluation.ipynb`
+3. Run `03_fnspid_experiment_and_results.ipynb`
+
+Intermediate and final results are generated automatically during execution and are not included in this repository.
