@@ -102,3 +102,30 @@ Balanced and deduplicated FIQA-2018 dataset with sentiment labels derived from c
 **Usage**
 - Benchmark dataset for prompt strategy evaluation  
 - Used to select the optimal prompt configuration before applying it to the FNSPID dataset
+
+# Streamlit Dashboard (Deployment)
+
+This Streamlit app is the interactive research interface for the thesis project:
+LLM Sentiment Inference → DMSI Construction → Quant Strategy Evaluation.
+
+## Features
+- Strategy Evaluation dashboard (IC leaderboard, cumulative returns, alpha, win-rate, max drawdown)
+- Live DMSI Experimental Lab (Gemini-based sentiment inference on headlines + T+1 market validation)
+- Academic disclaimer: theoretical gross returns (no transaction costs/slippage)
+
+## Project Structure
+app/
+app.py
+requirements.txt
+assets/
+data/
+
+
+## How to Run Locally
+1) Create environment & install dependencies:
+```bash
+pip install -r requirements.txt
+
+
+Run Streamlit:
+streamlit run app.py
