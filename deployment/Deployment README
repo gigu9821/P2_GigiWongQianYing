@@ -1,0 +1,43 @@
+# Streamlit Dashboard (Deployment)
+
+This Streamlit application is the deployment component of the research project on  
+**LLM-based Financial Sentiment Analysis and Market Signal Construction**.
+
+The dashboard provides an interactive interface to demonstrate how financial news sentiment,
+inferred using a large language model (Gemini), is transformed into a Daily Market Sentiment Index (DMSI)
+and evaluated through quantitative backtesting.
+
+---
+
+## Features
+- Strategy evaluation dashboard (IC leaderboard, cumulative returns, alpha, win rate, max drawdown)
+- Live DMSI experimental module using financial news headlines
+- Optional T+1 market validation for historical dates
+- Academic disclaimer: theoretical gross returns (no transaction costs or slippage)
+
+---
+
+## Project Structure
+app/
+app.py
+requirements.txt
+assets/
+data/
+
+
+> Note: The repository may contain sample datasets or placeholders instead of full raw data.
+
+---
+
+## How to Run
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+
+API Key
+The Live DMSI module requires a Google Gemini API key.
+The key is entered securely via the dashboard UI and is not stored in the codebase.
+
+Disclaimer
+This dashboard is for academic and research demonstration purposes only.
+It does not constitute financial or investment advice.
