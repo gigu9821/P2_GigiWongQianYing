@@ -48,3 +48,57 @@ The notebooks request a Google GenAI API key via secure input and do not store c
 3. Run `03_fnspid_experiment_and_results.ipynb`
 
 Intermediate and final results are generated automatically during execution and are not included in this repository.
+
+# Data Directory
+
+This folder contains the cleaned and standardized datasets used in this research.
+All datasets have been preprocessed to ensure consistency, reproducibility, and direct usability in the experimental pipelines.
+
+---
+
+## 1. djia_news_cleaned_2021_2023.csv
+
+**Description**  
+Cleaned financial news data extracted from the FNSPID dataset, filtered to include only Dow Jones Industrial Average (DJIA) constituent companies between 2021 and 2023.
+
+**Key preprocessing steps**
+- Removed records with missing dates, tickers, or headlines  
+- Filtered by DJIA constituent tickers  
+- Standardized column names (`date`, `title`, `ticker`)  
+- Preserved duplicate headlines across different tickers to reflect real-world news coverage
+
+**Usage**
+- Input dataset for FNSPID sentiment inference experiments  
+- Used to construct the Daily Market Sentiment Index (DMSI)
+
+---
+
+## 2. DJIA_2021_2023.csv
+
+**Description**  
+Historical price data for the Dow Jones Industrial Average (DJIA) index covering the period from 2021 to 2023.
+
+**Key features**
+- Daily open, high, low, close, and volume information  
+- Aligned to trading days for return and predictive analysis  
+
+**Usage**
+- Used as the market benchmark  
+- Supports return calculation, Information Coefficient (IC), Granger causality tests, and backtesting analysis
+
+---
+
+## 3. fiqa_1.csv
+
+**Description**  
+Balanced and deduplicated FIQA-2018 dataset with sentiment labels derived from continuous sentiment scores.
+
+**Key preprocessing steps**
+- Merged train, validation, and test splits  
+- Converted continuous sentiment scores into three classes (Positive, Neutral, Negative) using a neutral band threshold  
+- Performed class balancing via stratified sampling  
+- Removed fully duplicated rows after balancing  
+
+**Usage**
+- Benchmark dataset for prompt strategy evaluation  
+- Used to select the optimal prompt configuration before applying it to the FNSPID dataset
