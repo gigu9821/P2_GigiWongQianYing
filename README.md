@@ -120,6 +120,9 @@ requirements.txt
 assets/
 data/
 
+## API Key
+The Live DMSI module requires a Google Gemini API key.
+The key is entered securely via the dashboard UI and is not stored in the codebase.
 
 ## How to Run Locally
 1) Create environment & install dependencies:
