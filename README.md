@@ -47,21 +47,3 @@ Recommended (Colab-friendly):
 Install (example):
 ```bash
 pip install -U pandas numpy tqdm scikit-learn statsmodels matplotlib google-genai
-
-
-## How to Run (Suggested Order)
-
-Run 01_fiqa_preprocessing.ipynb
-Generates fiqa_standardized.csv.
-
-Run 02_fiqa_experiment_and_evaluation.ipynb
-Runs prompt experiments on FIQA and produces evaluation metrics.
-Use the best-performing prompts for downstream FNSPID/DJIA experiments.
-
-Run 03_fnspid_experiment_and_results.ipynb
-Runs sentiment inference on DJIA news,
-Builds DMSI, computes IC, runs Granger/T+2 validation, and backtests.
-
-## Notes
-The notebooks request a Google GenAI API key via input() and do not store the key in code.
-CSV outputs are written incrementally to reduce data loss risk during long runs.
